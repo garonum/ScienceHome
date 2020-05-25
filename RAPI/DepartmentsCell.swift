@@ -24,9 +24,9 @@ class BaseCell: UICollectionViewCell {
 }
 
 class DepartmentsCell: BaseCell {
-    var department: Department? {
+    var departmentName: String? {
         didSet {
-            titleLabel.text = department?.title
+            titleLabel.text = departmentName
                         
         }
     }

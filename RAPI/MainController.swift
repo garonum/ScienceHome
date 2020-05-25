@@ -6,16 +6,22 @@
 //  Copyright © 2020 Garonum. All rights reserved.
 //
 import UIKit
-
+struct Dep: Codable {
+    var name:String
+}
 class MainController: UIViewController, UICollectionViewDataSource{
  
-    
+        
     let sectionInsets = UIEdgeInsets(top: 25.0, left: 20.0, bottom: 5.0, right: 20.0)
-    var departments: [Department]?
+    //var departments: [Department]?
+    var departments: [[String: AnyObject]] = []
+    var titlesDepartments: [String] = []
     var collectionView: UICollectionView!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //post()
         fetchData()
         
         view.backgroundColor = UIColor.blue//.withAlphaComponent(0.9)
@@ -26,7 +32,10 @@ class MainController: UIViewController, UICollectionViewDataSource{
         self.navigationItem.title = "Департаменты"
         let textAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white]
         navigationController?.navigationBar.titleTextAttributes = textAttributes
-        
+        self.navigationController!.navigationBar.barStyle = .black
+        self.navigationController!.navigationBar.isTranslucent = true
+        self.navigationController!.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
+        self.navigationController!.navigationBar.tintColor = #colorLiteral(red: 1, green: 0.99997437, blue: 0.9999912977, alpha: 1)
         setupCollectionView()
         //setup()
         //setupMoreButton()
@@ -68,7 +77,8 @@ class MainController: UIViewController, UICollectionViewDataSource{
   
       
       func fetchData() {
-          guard let url = URL(string: "http://localhost:3000/departments") else { return }
+        
+          guard let url = URL(string: "http://localhost:3000/posts") else { return }
           URLSession.shared.dataTask(with: url) { (data, response, error) in
               
               if error != nil {
@@ -78,13 +88,35 @@ class MainController: UIViewController, UICollectionViewDataSource{
               
               do {
                   let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers)
-                  
-                  self.departments = [Department]()
-              
-                  for dictionary in json as! [String] {
-                    
-                      let department = Department()
-                      department.title = dictionary //as? String
+                
+                
+                for deparments in json as! [[String: AnyObject]]{
+                    self.departments = deparments["departments"] as! [[String: AnyObject]]
+                    //let x = self.departments[0]["users"] as? [[String : AnyObject]]
+                    for deparment in deparments["departments"] as! [[String: AnyObject]]{
+                        self.titlesDepartments.append(deparment["title"] as! String )
+                        
+                    }
+                }
+                
+                
+               //   self.departments = [Department]()
+                
+//                for dictionary in json as! [[String: AnyObject]]{
+//                    for d in dictionary["departments"] as! [String: AnyObject]{
+//                        print(d.key)
+//                        for u in d.value as! [String: AnyObject]{
+//                            for n in u.value as! [String: AnyObject]{
+//
+//                            }
+//                        }
+//                    }
+//                }
+//
+//
+//                    }
+//                      let department = Department()
+                      //department.title = dictionary //as? String
                       //department.thumbnailImageName = dictionary["thumbnail_image_name"] as? String
                       
     //                  let channelDictionary = dictionary["channel"] as! [String: AnyObject]
@@ -95,8 +127,8 @@ class MainController: UIViewController, UICollectionViewDataSource{
     //
     //                  department.channel = channel
                       
-                      self.departments?.append(department)
-                  }
+                      //self.departments?.append(department)
+                  
                   
                   DispatchQueue.main.async {
                       self.collectionView?.reloadData()
@@ -117,18 +149,25 @@ class MainController: UIViewController, UICollectionViewDataSource{
 extension MainController: UICollectionViewDelegate{
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return departments?.count ?? 0
+        return titlesDepartments.count
       }
       
       func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
           let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CellID", for: indexPath) as! DepartmentsCell
-        cell.department = departments?[indexPath.item]
-        cell.backgroundColor = UIColor.blue.withAlphaComponent(0.5)
+        //let department = self.departments?[indexPath.item]["departments"] as! [String: AnyObject]
+        
+        cell.departmentName = self.titlesDepartments[indexPath.item]
+        cell.backgroundColor = UIColor(red: 0.6667, green: 0.702, blue: 1, alpha: 1.0)
           return cell
       }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let schedule = Schedule()
-        schedule.showSettings()
+        
+        let schedule = Schedule(collectionViewLayout: UICollectionViewFlowLayout())
+        //let department = self.departments[indexPath.item]
+
+        schedule.users = self.departments[indexPath.item]["users"] as? [[String : AnyObject]]
+        //schedule.date = indexPath.row
+        //schedule.showSettings()
         self.show(schedule, sender: self)
     }
 //    func collectionView(_ collectionView: UICollectionView,
@@ -202,8 +241,29 @@ extension MainController{
                   var urlRequest = URLRequest(url: url)
                   urlRequest.httpMethod = "POST"
                   
-            let params:[String: Any] = ["departmentName": "1", "fullName": "Antony Hopkins",
-                  "dayStatus": ["1":"Я", "2":"Я"]]
+//            let params:[String: Any] = ["departments": [ "Департамент №1":["users":[
+//                                      "Kavin Bakon": [
+//                                              "shedule":[
+//                                                      "month":[
+//                                                          "Январь":[
+//                                                              "1": "Я"
+//                                                           ]
+//                                                      ]
+//                                                  ]
+//                                       ]
+//                                  ]
+//                       ]]]
+            
+            //let params2:[String: Any] = ["departments": [ "Департамент №1":["0":"0"],"Департамент №2":["1":"1"]]]
+//            let params:Dep = Dep(name: "bj")
+            
+            let params : [String : Any] = [
+                "departments":[["title":"Департамент №1",
+                                "users":[["fullName":"Oneel Blake","schedule":["Январь":["1":"Я"]]]]],
+                               ["title":"Департамент №2",
+                                "users":[["fullName":"Oneel Blake","schedule":["Январь":["1":"Я"]]]]]
+                ]
+            ]
                   do {
                       let data = try JSONSerialization.data(withJSONObject: params, options: .init())
                       
