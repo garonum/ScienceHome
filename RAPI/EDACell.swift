@@ -1,14 +1,16 @@
 //
-//  SettingCell.swift
-//  youtube
+//  EDACell.swift
+//  RAPI
 //
-//  Created by Brian Voong on 6/18/16.
-//  Copyright © 2016 letsbuildthatapp. All rights reserved.
+//  Created by LA'D on 26.05.2020.
+//  Copyright © 2020 Garonum. All rights reserved.
 //
+
+
 
 import UIKit
 
-class SettingCell: BaseCell {
+class EDACell: BaseCell {
     
     override var isHighlighted: Bool {
         didSet {
@@ -20,9 +22,9 @@ class SettingCell: BaseCell {
         }
     }
     
-    var setting: Setting? {
+    var fullName: String? {
         didSet {
-            nameLabel.text = setting?.name
+            nameLabel.text = fullName!
             
 //            if let imageName = setting?.imageName {
 //                iconImageView.image = UIImage(named: imageName)?.withRenderingMode(.alwaysTemplate)
@@ -47,17 +49,17 @@ class SettingCell: BaseCell {
     
     override func setupViews() {
         super.setupViews()
-        
+        self.backgroundColor = UIColor.blue
         addSubview(nameLabel)
-        addSubview(iconImageView)
-        
-        addConstraintsWithFormat("H:|-8-[v0(30)]-8-[v1]|", views: iconImageView, nameLabel)
+//        addSubview(iconImageView)
+//        
+     //   addConstraintsWithFormat("H:|-8-[v0(30)]-8-[v1]|", views: iconImageView, nameLabel)
         
         addConstraintsWithFormat("V:|[v0]|", views: nameLabel)
-        
-        addConstraintsWithFormat("V:[v0(30)]", views: iconImageView)
-        
-        addConstraint(NSLayoutConstraint(item: iconImageView, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1, constant: 0))
+//        
+//        addConstraintsWithFormat("V:[v0(30)]", views: iconImageView)
+//        
+//        addConstraint(NSLayoutConstraint(item: iconImageView, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1, constant: 0))
         
     }
 }

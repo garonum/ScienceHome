@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ScheduleClell: BaseCell {
+class ScheduleCell: BaseCell {
     var department: Department? {
         didSet {
             //titleLabel.text = department?.title

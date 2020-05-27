@@ -7,12 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FA07E615247D3CD000752867 /* EDAController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA07E614247D3CD000752867 /* EDAController.swift */; };
+		FA07E617247D555500752867 /* EDACell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA07E616247D555500752867 /* EDACell.swift */; };
+		FA07E619247D818400752867 /* Header.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA07E618247D818300752867 /* Header.swift */; };
 		FA62D1DD24713AD600EE306C /* Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA62D1DC24713AD600EE306C /* Schedule.swift */; };
 		FAA59E32246F98EF000C27C3 /* SettingsLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA59E31246F98EF000C27C3 /* SettingsLauncher.swift */; };
 		FAA59E34246F9D09000C27C3 /* DepartmentsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA59E33246F9D09000C27C3 /* DepartmentsCell.swift */; };
 		FAA59E5824707EFF000C27C3 /* Department.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA59E5724707EFF000C27C3 /* Department.swift */; };
 		FAA59E5A2470D9B0000C27C3 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA59E592470D9AF000C27C3 /* Extensions.swift */; };
-		FAE929D12474BEB2003465DC /* ScheduleClell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE929D02474BEB2003465DC /* ScheduleClell.swift */; };
+		FAE929D12474BEB2003465DC /* ScheduleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE929D02474BEB2003465DC /* ScheduleCell.swift */; };
 		FAE929D52477D3C4003465DC /* MounthLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE929D42477D3C4003465DC /* MounthLauncher.swift */; };
 		FAE929D72477DB48003465DC /* SettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE929D62477DB48003465DC /* SettingCell.swift */; };
 		FAFE3EC2246F1FF300D5A526 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFE3EC1246F1FF300D5A526 /* AppDelegate.swift */; };
@@ -25,12 +28,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		FA07E614247D3CD000752867 /* EDAController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EDAController.swift; sourceTree = "<group>"; };
+		FA07E616247D555500752867 /* EDACell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EDACell.swift; sourceTree = "<group>"; };
+		FA07E618247D818300752867 /* Header.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Header.swift; sourceTree = "<group>"; };
 		FA62D1DC24713AD600EE306C /* Schedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Schedule.swift; sourceTree = "<group>"; };
 		FAA59E31246F98EF000C27C3 /* SettingsLauncher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsLauncher.swift; sourceTree = "<group>"; };
 		FAA59E33246F9D09000C27C3 /* DepartmentsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DepartmentsCell.swift; sourceTree = "<group>"; };
 		FAA59E5724707EFF000C27C3 /* Department.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Department.swift; sourceTree = "<group>"; };
 		FAA59E592470D9AF000C27C3 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
-		FAE929D02474BEB2003465DC /* ScheduleClell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleClell.swift; sourceTree = "<group>"; };
+		FAE929D02474BEB2003465DC /* ScheduleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleCell.swift; sourceTree = "<group>"; };
 		FAE929D42477D3C4003465DC /* MounthLauncher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MounthLauncher.swift; sourceTree = "<group>"; };
 		FAE929D62477DB48003465DC /* SettingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingCell.swift; sourceTree = "<group>"; };
 		FAFE3EBE246F1FF200D5A526 /* RAPI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RAPI.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -82,14 +88,17 @@
 				FAFE3ECF246F200900D5A526 /* Info.plist */,
 				FAFE3EC9246F200900D5A526 /* Preview Content */,
 				FAFE3ED5246F294800D5A526 /* MainController.swift */,
-				FAA59E31246F98EF000C27C3 /* SettingsLauncher.swift */,
-				FAE929D42477D3C4003465DC /* MounthLauncher.swift */,
-				FAE929D62477DB48003465DC /* SettingCell.swift */,
 				FAA59E33246F9D09000C27C3 /* DepartmentsCell.swift */,
+				FA07E614247D3CD000752867 /* EDAController.swift */,
+				FA07E616247D555500752867 /* EDACell.swift */,
+				FA07E618247D818300752867 /* Header.swift */,
+				FAA59E31246F98EF000C27C3 /* SettingsLauncher.swift */,
+				FAE929D62477DB48003465DC /* SettingCell.swift */,
+				FAE929D42477D3C4003465DC /* MounthLauncher.swift */,
 				FAA59E5724707EFF000C27C3 /* Department.swift */,
 				FAA59E592470D9AF000C27C3 /* Extensions.swift */,
 				FA62D1DC24713AD600EE306C /* Schedule.swift */,
-				FAE929D02474BEB2003465DC /* ScheduleClell.swift */,
+				FAE929D02474BEB2003465DC /* ScheduleCell.swift */,
 			);
 			path = RAPI;
 			sourceTree = "<group>";
@@ -180,11 +189,14 @@
 				FA62D1DD24713AD600EE306C /* Schedule.swift in Sources */,
 				FAA59E5A2470D9B0000C27C3 /* Extensions.swift in Sources */,
 				FAE929D52477D3C4003465DC /* MounthLauncher.swift in Sources */,
-				FAE929D12474BEB2003465DC /* ScheduleClell.swift in Sources */,
+				FAE929D12474BEB2003465DC /* ScheduleCell.swift in Sources */,
 				FAFE3EC4246F1FF300D5A526 /* SceneDelegate.swift in Sources */,
 				FAFE3EC6246F1FF300D5A526 /* ContentView.swift in Sources */,
+				FA07E619247D818400752867 /* Header.swift in Sources */,
 				FAA59E5824707EFF000C27C3 /* Department.swift in Sources */,
 				FAA59E34246F9D09000C27C3 /* DepartmentsCell.swift in Sources */,
+				FA07E617247D555500752867 /* EDACell.swift in Sources */,
+				FA07E615247D3CD000752867 /* EDAController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

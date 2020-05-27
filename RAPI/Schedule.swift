@@ -17,7 +17,7 @@ class Schedule: UICollectionViewController, UICollectionViewDelegateFlowLayout {
         view.backgroundColor = UIColor.blue
         collectionView.dataSource = self
         collectionView.delegate = self
-        self.collectionView.register(ScheduleClell.self, forCellWithReuseIdentifier: "CellIDS")
+        self.collectionView.register(ScheduleCell.self, forCellWithReuseIdentifier: "CellIDS")
 
         var topbarHeight: CGFloat {
                  return (view.window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0.0) +
@@ -25,7 +25,7 @@ class Schedule: UICollectionViewController, UICollectionViewDelegateFlowLayout {
              }
         collectionView.frame = CGRect(x: 0, y: topbarHeight, width: view.frame.width, height:view.frame.height)
      
-        print(self.navigationController?.navigationItem.accessibilityFrame.height)
+        //print(self.navigationController?.navigationItem.accessibilityFrame.height)
         collectionView.showsVerticalScrollIndicator = true
         collectionView.backgroundColor = UIColor.white.withAlphaComponent(0.8)
 
@@ -77,7 +77,7 @@ extension Schedule {
       }
       
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-          let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CellIDS", for: indexPath) as! ScheduleClell
+          let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CellIDS", for: indexPath) as! ScheduleCell
         //print(self.users?[indexPath.row]["fullName"])
        // cell.department = departments?[indexPath.item]
         if indexPath.row == 0 {

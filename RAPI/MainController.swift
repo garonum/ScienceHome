@@ -69,11 +69,16 @@ class MainController: UIViewController, UICollectionViewDataSource{
         
       }
     
-
-       let settingsLauncher = SettingsLauncher()
+    lazy var settingsLauncher: SettingsLauncher = {
+             let launcher = SettingsLauncher()
+             launcher.mainController = self
+             return launcher
+         }()
+       //let settingsLauncher = SettingsLauncher()
        @objc func handleMore() {
            settingsLauncher.showSettings()
        }
+  
   
       
       func fetchData() {
@@ -143,6 +148,26 @@ class MainController: UIViewController, UICollectionViewDataSource{
               
           }.resume()
       }
+    
+    func showControllerForSetting(setting: Setting) {
+        
+        if setting.name == "Администратор справочника работников"{
+            let edAdmin = EDAController(collectionViewLayout: UICollectionViewFlowLayout())
+            edAdmin.users = self.departments as [[String : AnyObject]]
+            edAdmin.titles = self.titlesDepartments
+                self.show(edAdmin, sender: self)
+        } else{
+            let dummySettingsViewController = UIViewController()
+                 dummySettingsViewController.view.backgroundColor = UIColor.white
+                 dummySettingsViewController.navigationItem.title = setting.name
+                 navigationController?.navigationBar.tintColor = UIColor.white
+                 navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+                 navigationController?.pushViewController(dummySettingsViewController, animated: true)
+        }
+         
+        //self.show(dummySettingsViewController, sender: self)
+      }
+ 
    
    
 }
@@ -273,7 +298,7 @@ extension MainController{
                       URLSession.shared.dataTask(with: urlRequest) { (data, resp, err) in
                           // check error
                           
-                          guard let data = data else { return }
+                          //guard let data = data else { return }
                           
                           //completion(nil)
                           
