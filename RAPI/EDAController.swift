@@ -15,7 +15,8 @@ class EDAController: UICollectionViewController, UICollectionViewDelegateFlowLay
     private let minimumItemSpacing: CGFloat = 13
    
     var users: [[String : AnyObject]]?
-    var date:Int?
+  
+    var departments:[[String : AnyObject]]?
     var titles:[String]?
     
     func setupCollectionView() {
@@ -82,6 +83,16 @@ extension EDAController {
         cell.fullName = fullName?[indexPath.row]["fullName"] as? String
           return cell
       }
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let editViewController = EditViewController()
+        let fullName = users?[indexPath.section]["users"] as? [[String : AnyObject]]
+            editViewController.fullName = fullName?[indexPath.row]["fullName"] as? String
+        editViewController.departments = departments
+
+            self.show(editViewController, sender: self)
+        
+      }
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
     
            //  if kind == UICollectionView.elementKindSectionHeader {
@@ -90,7 +101,7 @@ extension EDAController {
                         fatalError("Invalid view type")
                     }
         header.title =  titles?[indexPath.section]
-                 header.backgroundColor = .blue
+                 header.backgroundColor = UIColor(red: 0.6667, green: 0.702, blue: 1, alpha: 1.0)
                  return header
 //             }else{
 //

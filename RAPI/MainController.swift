@@ -15,6 +15,7 @@ class MainController: UIViewController, UICollectionViewDataSource{
     let sectionInsets = UIEdgeInsets(top: 25.0, left: 20.0, bottom: 5.0, right: 20.0)
     //var departments: [Department]?
     var departments: [[String: AnyObject]] = []
+    var main: [[String: AnyObject]] = []
     var titlesDepartments: [String] = []
     var collectionView: UICollectionView!
     
@@ -79,7 +80,6 @@ class MainController: UIViewController, UICollectionViewDataSource{
            settingsLauncher.showSettings()
        }
   
-  
       
       func fetchData() {
         
@@ -93,7 +93,7 @@ class MainController: UIViewController, UICollectionViewDataSource{
               
               do {
                   let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers)
-                
+                self.main = json as! [[String: AnyObject]]
                 
                 for deparments in json as! [[String: AnyObject]]{
                     self.departments = deparments["departments"] as! [[String: AnyObject]]
@@ -155,6 +155,7 @@ class MainController: UIViewController, UICollectionViewDataSource{
             let edAdmin = EDAController(collectionViewLayout: UICollectionViewFlowLayout())
             edAdmin.users = self.departments as [[String : AnyObject]]
             edAdmin.titles = self.titlesDepartments
+            edAdmin.departments = self.main
                 self.show(edAdmin, sender: self)
         } else{
             let dummySettingsViewController = UIViewController()
