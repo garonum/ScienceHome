@@ -45,7 +45,7 @@ class SettingsLauncher: NSObject, UICollectionViewDataSource, UICollectionViewDe
        
             blackView.backgroundColor = UIColor(white: 0, alpha: 0.5)
             
-            blackView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleDismiss)))
+            blackView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(jestureDismiss)))
             
             window.addSubview(blackView)
             
@@ -69,6 +69,7 @@ class SettingsLauncher: NSObject, UICollectionViewDataSource, UICollectionViewDe
     }
     
     @objc func handleDismiss(setting: Setting) {
+        
         UIView.animate(withDuration: 0.5, animations: {
             self.blackView.alpha = 0
             
@@ -80,6 +81,16 @@ class SettingsLauncher: NSObject, UICollectionViewDataSource, UICollectionViewDe
                 self.mainController?.showControllerForSetting(setting: setting)
             }
         })
+    }
+    @objc func jestureDismiss() {
+        
+        UIView.animate(withDuration: 0.5, animations: {
+            self.blackView.alpha = 0
+            
+            if let window = UIWindow.key {
+                self.collectionView.frame = CGRect(x: 0, y: window.frame.height, width: self.collectionView.frame.width, height: self.collectionView.frame.height)
+            }
+        }, completion: nil)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

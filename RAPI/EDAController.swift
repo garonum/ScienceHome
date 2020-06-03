@@ -18,8 +18,11 @@ class EDAController: UICollectionViewController, UICollectionViewDelegateFlowLay
   
     var departments:[[String : AnyObject]]?
     var titles:[String]?
+    var mainController: MainController!
+    var eda: EDAController!
     
     func setupCollectionView() {
+        eda = self
         view.backgroundColor = UIColor.blue
         collectionView.dataSource = self
         collectionView.delegate = self
@@ -54,13 +57,22 @@ class EDAController: UICollectionViewController, UICollectionViewDelegateFlowLay
         self.navigationController!.navigationBar.tintColor = #colorLiteral(red: 1, green: 0.99997437, blue: 0.9999912977, alpha: 1)
        let textAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white]
        navigationController?.navigationBar.titleTextAttributes = textAttributes
+        
 //
 //        let moreButton = UIBarButtonItem(image: UIImage(named: "nav_more_icon")?.withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleMore))
 //            self.navigationItem.rightBarButtonItem  = moreButton
         
         setupCollectionView()
     }
-   
+    func reload(dep:[[String : AnyObject]]){
+//
+//                departments = []
+//                titles = []
+                  self.users = dep
+//                  self.mainController?.fetchData()
+                  self.collectionView.reloadData()
+    
+    }
 //    let monthLauncher = MounthLauncher()
 //    @objc func handleMore() {
 //        monthLauncher.showMounth()
@@ -73,6 +85,7 @@ extension EDAController {
         return titles?.count ?? 0
     }
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
         return self.users?[section]["users"]?.count ?? 0
       }
       
@@ -88,7 +101,11 @@ extension EDAController {
         let editViewController = EditViewController()
         let fullName = users?[indexPath.section]["users"] as? [[String : AnyObject]]
             editViewController.fullName = fullName?[indexPath.row]["fullName"] as? String
-        editViewController.departments = departments
+            editViewController.departments = departments
+            editViewController.eda = eda
+            editViewController.mainController = mainController
+            editViewController.indexPath = indexPath
+            
 
             self.show(editViewController, sender: self)
         

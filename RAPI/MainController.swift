@@ -18,12 +18,15 @@ class MainController: UIViewController, UICollectionViewDataSource{
     var main: [[String: AnyObject]] = []
     var titlesDepartments: [String] = []
     var collectionView: UICollectionView!
+    var mainController: MainController!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         //post()
         fetchData()
+        
         
         view.backgroundColor = UIColor.blue//.withAlphaComponent(0.9)
         
@@ -44,7 +47,7 @@ class MainController: UIViewController, UICollectionViewDataSource{
     }
     
     func setupCollectionView() {
-        
+        mainController = self
           let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
             layout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 0, right: 10)
             layout.itemSize = CGSize(width: self.view.frame.width-20, height: 70)
@@ -81,8 +84,9 @@ class MainController: UIViewController, UICollectionViewDataSource{
        }
   
       
-      func fetchData() {
-        
+    func fetchData() {
+         departments = []
+         titlesDepartments = []
           guard let url = URL(string: "http://localhost:3000/posts") else { return }
           URLSession.shared.dataTask(with: url) { (data, response, error) in
               
@@ -96,7 +100,7 @@ class MainController: UIViewController, UICollectionViewDataSource{
                 self.main = json as! [[String: AnyObject]]
                 
                 for deparments in json as! [[String: AnyObject]]{
-                    self.departments = deparments["departments"] as! [[String: AnyObject]]
+                    self.departments = deparments["departments"] as! [[String: AnyObject]] 
                     //let x = self.departments[0]["users"] as? [[String : AnyObject]]
                     for deparment in deparments["departments"] as! [[String: AnyObject]]{
                         self.titlesDepartments.append(deparment["title"] as! String )
@@ -137,6 +141,7 @@ class MainController: UIViewController, UICollectionViewDataSource{
                   
                   DispatchQueue.main.async {
                       self.collectionView?.reloadData()
+                    
                   }
                   
                   
@@ -147,7 +152,14 @@ class MainController: UIViewController, UICollectionViewDataSource{
               
               
           }.resume()
+        
       }
+     func reload(dep:[[String : AnyObject]]){
+
+        self.departments = dep
+        self.collectionView.reloadData()
+        
+        }
     
     func showControllerForSetting(setting: Setting) {
         
@@ -156,6 +168,7 @@ class MainController: UIViewController, UICollectionViewDataSource{
             edAdmin.users = self.departments as [[String : AnyObject]]
             edAdmin.titles = self.titlesDepartments
             edAdmin.departments = self.main
+            edAdmin.mainController = mainController
                 self.show(edAdmin, sender: self)
         } else{
             let dummySettingsViewController = UIViewController()

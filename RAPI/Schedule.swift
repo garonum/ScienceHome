@@ -70,7 +70,7 @@ class Schedule: UICollectionViewController, UICollectionViewDelegateFlowLayout {
 
 extension Schedule {
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return users?.count ?? 0
+        return ((users?.count ?? 0) + 1)
     }
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 31
@@ -86,7 +86,7 @@ extension Schedule {
             if indexPath.section == 0 {
                 cell.date = "ФИО/Дата"
             } else{
-                cell.date = self.users?[indexPath.section]["fullName"] as? String
+                cell.date = self.users?[indexPath.section - 1]["fullName"] as? String
             }
           
             
@@ -94,7 +94,7 @@ extension Schedule {
             if indexPath.section == 0 {
                 cell.date = "\(indexPath.row)"
             } else{
-                let dayStarus = self.users?[indexPath.section]["schedule"]?["\(curMounth)"] as? [String : String]
+                let dayStarus = self.users?[indexPath.section - 1]["schedule"]?["\(curMounth)"] as? [String : String]
                 cell.date = dayStarus?["1"] ?? "_"
             }
             
@@ -115,7 +115,7 @@ extension Schedule {
         itemSize = CGSize(width: 20, height: 15)
            return itemSize
        }
-func collectionView(_ collectionView: UICollectionView,
+    func collectionView(_ collectionView: UICollectionView,
                        layout collectionViewLayout: UICollectionViewLayout,
                        insetForSectionAt section: Int) -> UIEdgeInsets {
        return sectionInsets
