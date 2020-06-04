@@ -34,25 +34,23 @@ class EditViewController: UIViewController {
           return sampleTextField
       
      }()
-    func setupButton(){
+    
+    var saveButton:UIButton = {
            
               let button = UIButton.init(type: .system)
-                  button.frame = CGRect(x: 50.0, y: 155.0, width: 200.0, height: 52.0)
+                  button.frame = CGRect()
                   button.layer.borderWidth = 5.0
                   button.layer.borderColor = UIColor.white.cgColor
-                  button.backgroundColor = UIColor.green
+                  button.backgroundColor = UIColor(red: 0.2627, green: 0.8275, blue: 0.302, alpha: 1.0)
                   button.titleLabel?.textColor = UIColor.black
                   button.tintColor = UIColor.white
                   button.layer.cornerRadius = 15.0
                   button.setTitle("Сохранить", for: .normal)
-                  button.addTarget(self, action:#selector(buttonClicked), for: .touchUpInside)
-              self.view.addSubview(button)
-           
-           //addConstraintsWithFormat("H:|-25-[v0]-25-|", views: button)
-           //addConstraintsWithFormat("V:|-130-[v0]", views: button)
-          }
+                  button.addTarget(self, action:#selector(save), for: .touchUpInside)
+              return button
+          }()
 
-          @objc func buttonClicked() {
+          @objc func save() {
 
             var dep = departments?[0]["departments"] as? [[String: AnyObject]]
             var users = dep?[indexPath?.section ?? 0]["users"] as? [[String : AnyObject]]
@@ -86,21 +84,45 @@ class EditViewController: UIViewController {
                           } catch {
                               //completion(error)
                           }
-            
-            
-            
-           
+
           }
 
+    var deleteButton:UIButton = {
+     
+        let button = UIButton.init(type: .system)
+            button.frame = CGRect()
+            button.layer.borderWidth = 5.0
+            button.layer.borderColor = UIColor.white.cgColor
+            button.backgroundColor = UIColor.red
+            button.titleLabel?.textColor = UIColor.black
+            button.tintColor = UIColor.white
+            button.layer.cornerRadius = 15.0
+            button.setTitle("Удалить", for: .normal)
+           button.addTarget(self, action:#selector(deleteUser), for: .touchUpInside)
+        return button
+    }()
+    
+    @objc func deleteUser() {
+
+
+         }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
         navigationItem.title = "Редактирование"
         
-            fullNameField.delegate = self
-           self.view.addSubview(fullNameField)
-        setupButton()
+        fullNameField.delegate = self
+        
+        self.view.addSubview(fullNameField)
+        self.view.addSubview(saveButton)
+        self.view.addSubview(deleteButton)
+        
+        
+        addConstraintsWithFormat("H:[v0(100)]-15-[v1(100)]-25-|", views: saveButton, deleteButton)
+        
+        addConstraintsWithFormat("V:|-150-[v0(50)]", views: saveButton)
+        addConstraintsWithFormat("V:|-150-[v0(50)]", views: deleteButton)
     }
     
 
